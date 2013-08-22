@@ -1,0 +1,23 @@
+require 'gist_nuke'
+require 'optparse'
+
+#!/usr/bin/env ruby
+
+options = {}
+
+opts_parser = OptionParser.new do |opt|
+  opt.banner = <<-HELP
+    There are quite a few wonderful options that you can run.  I will update this help
+    text more once I have actually filled them in
+  HELP
+
+  opt.on("--login", "Let's get you all Authed") do
+    exit
+  end
+
+  opt.on("--hi", "Finally time to test the hi") do
+    GistNuke.hi
+  end
+end
+
+opts_parser.parse!
