@@ -12,6 +12,7 @@ opts_parser = OptionParser.new do |opt|
   HELP
 
   opt.on("--login", "Let's get you all Authed") do
+    GistNuke.login
     exit
   end
 
@@ -21,3 +22,4 @@ opts_parser = OptionParser.new do |opt|
 end
 
 opts_parser.parse!
+p ARGV
