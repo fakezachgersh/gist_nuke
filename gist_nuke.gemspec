@@ -4,10 +4,11 @@ Gem::Specification.new do |s|
   s.date        = '2013-08-22'
   s.summary     = "Batch deletion of gists"
   s.description = "A great way to clean up your github gist profile"
-  s.authors     = ["Zach Gershman"]
+  s.authors     = ["zachgersh"]
   s.email       = 'zachgersh@gmail.com'
   s.files       = ["lib/gist_nuke.rb"]
   s.homepage    =
     'http://zachgersh.github.io'
   s.license       = 'MIT'
+  s.add_runtime_dependency "typhoeus",["= 0.6.5"]
 end
