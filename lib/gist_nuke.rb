@@ -73,22 +73,21 @@ module GistNuke
       just_keys << hash['id']
     end
 
-    just_keys
+    p just_keys
   end
 
   def delete_range(numbers = [])
-    numbers= numbers.map { |num| num.to_i }
-    range = (numbers[0]..numbers[-1])
-    delete_list = load_gists[range]
-    p queue = construct_hydra(delete_list)
-    #queue.run
+    p numbers = numbers.map { |num| num.to_i }
+    p range = (numbers[0]..numbers[-1])
+    p delete_list = load_gists[range]
+    construct_hydra(delete_list)
+    @batch.run
   end
 
   def construct_hydra(range)
-    p range
     t = File.read(".gist_nuke")
-    batch = Typhoeus::Hydra.new
-    range.map { |gist_id| batch.queue(Typhoeus::Request.new("#{BASE_URL}gists/#{gist_id}?access_token=#{t}",
+    @batch = Typhoeus::Hydra.new
+    range.map { |gist_id| @batch.queue(Typhoeus::Request.new("#{BASE_URL}gists/#{gist_id}?access_token=#{t}",
                                                            method: :delete))}
   end
 end
