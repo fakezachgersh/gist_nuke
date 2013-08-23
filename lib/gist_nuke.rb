@@ -76,7 +76,7 @@ module GistNuke
     puts just_keys.count
   end
 
-  def lets_delete
-
+  def delete_range(range = [])
+    p range
   end
 end
