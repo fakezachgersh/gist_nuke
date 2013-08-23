@@ -58,7 +58,7 @@ module GistNuke
       request = Net::HTTP::Get.new uri.request_uri
 
       response = http.request(request)
-      p response['link']
+
       gist_hash = JSON.parse(response.body)
 
       just_keys(gist_hash)
@@ -75,9 +75,12 @@ module GistNuke
     just_keys
   end
 
-  def delete_range(range = "0..1")
-    gist_list = load_gist["#{range}"]
-    queue = construct_hydra(gist_list)
+  def delete_range(numbers = [])
+    numbers= numbers.map { |num| num.to_i }
+    range = (numbers[0]..numbers[-1])
+    gist_list = load_gists[range]
+    p gist_list
+    #queue = construct_hydra(gist_list)
   end
 
   def construct_hydra(range)
