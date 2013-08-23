@@ -52,14 +52,28 @@ module GistNuke
 
   def load_gists(page_number = 0)
     token = File.read(".gist_nuke")
-    uri = URI("#{BASE_URL}gists?access_token=#{token}")
+    uri = URI("#{BASE_URL}gists?access_token=#{token}&page=#{page_number}")
     Net::HTTP.start(uri.host, uri.port,
                     :use_ssl => uri.scheme == 'https') do |http|
       request = Net::HTTP::Get.new uri.request_uri
 
       response = http.request(request)
-      p response.body
+      p response['link']
+      gist_hash = JSON.parse(response.body)
+
+      just_keys(gist_hash)
     end
+  end
+
+  def just_keys(gist_hash = {})
+    just_keys = []
+
+    gist_hash.each do |hash|
+      just_keys << hash['id']
+    end
+
+    p just_keys
+    puts just_keys.count
   end
 
   def lets_delete
