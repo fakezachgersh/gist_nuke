@@ -1,6 +1,7 @@
 require 'net/http'
 require 'json'
 require 'uri'
+require 'typhoeus'
 
 module GistNuke
   extend self
@@ -78,12 +79,16 @@ module GistNuke
   def delete_range(numbers = [])
     numbers= numbers.map { |num| num.to_i }
     range = (numbers[0]..numbers[-1])
-    gist_list = load_gists[range]
-    p gist_list
-    #queue = construct_hydra(gist_list)
+    delete_list = load_gists[range]
+    p queue = construct_hydra(delete_list)
+    #queue.run
   end
 
   def construct_hydra(range)
-    range
+    p range
+    t = File.read(".gist_nuke")
+    batch = Typhoeus::Hydra.new
+    range.map { |gist_id| batch.queue(Typhoeus::Request.new("#{BASE_URL}gists/#{gist_id}?access_token=#{t}",
+                                                           method: :delete))}
   end
 end
