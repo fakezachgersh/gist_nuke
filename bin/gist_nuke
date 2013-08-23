@@ -19,7 +19,10 @@ opts_parser = OptionParser.new do |opt|
   opt.on("--hi", "Finally time to test the hi") do
     GistNuke.hi
   end
+
+  opt.on("--list", "Let's list these gists out") do
+    GistNuke.load_gists
+  end
 end
 
 opts_parser.parse!
-p ARGV

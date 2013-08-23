@@ -8,10 +8,6 @@ module GistNuke
   BASE_URL = "https://api.github.com/"
   AUTH_EXT = "authorizations"
 
-  def hi
-    puts "hey"
-  end
-
   def login
     credentials = {}
     puts "Let's get an Oauth Token from GitHub"
@@ -44,10 +40,23 @@ module GistNuke
       http.request(req)
     end
 
-    puts res.body
+    save_auth_token(res.body)
   end
 
-  def save_auth_token(token)
+  def save_auth_token(res)
+    token = JSON.parse(res)['token']
+    File.open(".gist_nuke", "w+") do |file|
+      file.write(token)
+    end
+  end
+
+  def load_gists
+    token = File.read(".gist_nuke")
+    p token
+    #uri = URI("#{BASE_URL}/gists/user?#{token}"
+  end
+
+  def lets_delete
 
   end
 end
