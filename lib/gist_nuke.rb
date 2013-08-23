@@ -50,10 +50,16 @@ module GistNuke
     end
   end
 
-  def load_gists
+  def load_gists(page_number = 0)
     token = File.read(".gist_nuke")
-    p token
-    #uri = URI("#{BASE_URL}/gists/user?#{token}"
+    uri = URI("#{BASE_URL}gists?access_token=#{token}")
+    Net::HTTP.start(uri.host, uri.port,
+                    :use_ssl => uri.scheme == 'https') do |http|
+      request = Net::HTTP::Get.new uri.request_uri
+
+      response = http.request(request)
+      p response.body
+    end
   end
 
   def lets_delete
