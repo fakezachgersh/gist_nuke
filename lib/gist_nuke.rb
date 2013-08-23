@@ -72,11 +72,15 @@ module GistNuke
       just_keys << hash['id']
     end
 
-    p just_keys
-    puts just_keys.count
+    just_keys
   end
 
-  def delete_range(range = [])
-    p range
+  def delete_range(range = "0..1")
+    gist_list = load_gist["#{range}"]
+    queue = construct_hydra(gist_list)
+  end
+
+  def construct_hydra(range)
+    range
   end
 end
