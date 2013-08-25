@@ -10,6 +10,6 @@ Gem::Specification.new do |s|
   s.homepage    =
     'http://zachgersh.github.io'
   s.license       = 'MIT'
-  s.add_runtime_dependency "typhoeus",["~> 0.6.5"]
-  s.add_development_dependency "vcr", ["~> 2.5.0"]
+  s.add_runtime_dependency "typhoeus", "~> 0.6.5"
+  s.add_development_dependency "vcr", "~> 2.5.0"
 end
