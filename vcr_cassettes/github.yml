@@ -1,0 +1,64 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://test:test@api.github.com/authorizations
+    body:
+      encoding: UTF-8
+      string: ! '{"scopes":["gist"],"note":"Batch delete your gists, you know you
+        want to."}'
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Mon, 26 Aug 2013 23:25:14 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Status:
+      - 201 Created
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4985'
+      X-Ratelimit-Reset:
+      - '1377560243'
+      Location:
+      - https://api.github.com/authorizations/3423851
+      X-Github-Media-Type:
+      - github.beta
+      X-Content-Type-Options:
+      - nosniff
+      Content-Length:
+      - '457'
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Expose-Headers:
+      - ETag, Link, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes,
+        X-Accepted-OAuth-Scopes
+      Access-Control-Allow-Origin:
+      - ! '*'
+      Etag:
+      - ! '"606cef5a1de323d824d0846e26a2acda"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Github-Request-Id:
+      - 5ceba3de-dfc6-4418-9ff1-29d01cedb264
+    body:
+      encoding: US-ASCII
+      string: ! '{"id":3423851,"url":"https://api.github.com/authorizations/3423851","app":{"name":"Batch
+        delete your gists, you know you want to. (API)","url":"http://developer.github.com/v3/oauth/#oauth-authorizations-api","client_id":"ceff5bf85e9dc32d9b1b"},"token":"fe71e9391a26d6280ac377081d7ba3bfe2364993","note":"Batch
+        delete your gists, you know you want to.","note_url":null,"created_at":"2013-08-26T23:25:14Z","updated_at":"2013-08-26T23:25:14Z","scopes":["gist"]}'
+    http_version: 
+  recorded_at: Mon, 26 Aug 2013 23:25:17 GMT
+recorded_with: VCR 2.5.0

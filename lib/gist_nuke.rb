@@ -22,10 +22,11 @@ module GistNuke
                end
 
     puts ""
-    phone_github(credentials)
+    token = get_github_token(credentials)
+    save_auth_token(token)
   end
 
-  def phone_github(credentials = {})
+  def get_github_token(credentials = {})
     uri = URI(BASE_URL + AUTH_EXT)
     req = Net::HTTP::Post.new(uri.path)
     req.content_type = "application/json"
@@ -41,11 +42,10 @@ module GistNuke
       http.request(req)
     end
 
-    save_auth_token(res.body)
+    JSON.parse(res.body)['token']
   end
 
-  def save_auth_token(res)
-    token = JSON.parse(res)['token']
+  def save_auth_token(token)
     File.open(".gist_nuke", "w+") do |file|
       file.write(token)
     end

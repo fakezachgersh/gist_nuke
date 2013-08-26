@@ -24,6 +24,7 @@ opts_parser = OptionParser.new do |opt|
   end
 
   opt.on("--deleterange range", "This is going to delete a range", Array) do |range|
+    p range
     GistNuke.delete_range(range)
   end
 end
