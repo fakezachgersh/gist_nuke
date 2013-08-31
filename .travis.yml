@@ -1,0 +1,9 @@
+language: ruby
+before_install:
+  - gem install bundler
+rvm:
+  - "2.0.0"
+  - "1.9.3"
+branches:
+    only:
+      - working
