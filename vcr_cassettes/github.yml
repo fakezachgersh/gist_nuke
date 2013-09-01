@@ -61,4 +61,67 @@ http_interactions:
         delete your gists, you know you want to.","note_url":null,"created_at":"2013-08-26T23:25:14Z","updated_at":"2013-08-26T23:25:14Z","scopes":["gist"]}'
     http_version: 
   recorded_at: Mon, 26 Aug 2013 23:25:17 GMT
+- request:
+    method: get
+    uri: https://api.github.com/gists?access_token=fe71e9391a26d6280ac377081d7ba3bfe2364993&page=0
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Sun, 01 Sep 2013 16:51:47 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4999'
+      X-Ratelimit-Reset:
+      - '1378057907'
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Last-Modified:
+      - Mon, 26 Aug 2013 23:11:14 GMT
+      Etag:
+      - ! '"4bbdf04716b4b94ca3270238eecd346b"'
+      X-Oauth-Scopes:
+      - gist
+      X-Accepted-Oauth-Scopes:
+      - gist
+      Vary:
+      - Accept, Authorization, Cookie
+      - Accept-Encoding
+      X-Github-Media-Type:
+      - github.beta
+      X-Content-Type-Options:
+      - nosniff
+      Content-Length:
+      - '1850'
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Expose-Headers:
+      - ETag, Link, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes,
+        X-Accepted-OAuth-Scopes
+      Access-Control-Allow-Origin:
+      - ! '*'
+      X-Github-Request-Id:
+      - 71859e4d-9fdf-45de-8eaf-974274f88961
+    body:
+      encoding: US-ASCII
+      string: ! '[{"url":"https://api.github.com/gists/b609c6afade596abd59c","forks_url":"https://api.github.com/gists/b609c6afade596abd59c/forks","commits_url":"https://api.github.com/gists/b609c6afade596abd59c/commits","id":"b609c6afade596abd59c","git_pull_url":"https://gist.github.com/b609c6afade596abd59c.git","git_push_url":"https://gist.github.com/b609c6afade596abd59c.git","html_url":"https://gist.github.com/b609c6afade596abd59c","files":{"asdf":{"filename":"asdf","type":"text/plain","language":null,"raw_url":"https://gist.github.com/raw/b609c6afade596abd59c/5e40c0877058c504203932e5136051cf3cd3519b/asdf","size":4}},"public":false,"created_at":"2013-08-26T23:11:13Z","updated_at":"2013-08-26T23:11:14Z","description":"asdf","comments":0,"user":{"login":"fakezachgersh","id":5297493,"avatar_url":"https://1.gravatar.com/avatar/c395c8d0312886319c9f38f868928e36?d=https%3A%2F%2Fidenticons.github.com%2F43531d8045817a7d1bed159feefdc565.png","gravatar_id":"c395c8d0312886319c9f38f868928e36","url":"https://api.github.com/users/fakezachgersh","html_url":"https://github.com/fakezachgersh","followers_url":"https://api.github.com/users/fakezachgersh/followers","following_url":"https://api.github.com/users/fakezachgersh/following{/other_user}","gists_url":"https://api.github.com/users/fakezachgersh/gists{/gist_id}","starred_url":"https://api.github.com/users/fakezachgersh/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/fakezachgersh/subscriptions","organizations_url":"https://api.github.com/users/fakezachgersh/orgs","repos_url":"https://api.github.com/users/fakezachgersh/repos","events_url":"https://api.github.com/users/fakezachgersh/events{/privacy}","received_events_url":"https://api.github.com/users/fakezachgersh/received_events","type":"User"},"comments_url":"https://api.github.com/gists/b609c6afade596abd59c/comments"}]'
+    http_version: 
+  recorded_at: Sun, 01 Sep 2013 16:51:48 GMT
 recorded_with: VCR 2.5.0

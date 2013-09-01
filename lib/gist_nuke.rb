@@ -60,9 +60,7 @@ module GistNuke
 
       response = http.request(request)
 
-      gist_hash = JSON.parse(response.body)
-
-      just_keys(gist_hash)
+      JSON.parse(response.body)
     end
   end
 
