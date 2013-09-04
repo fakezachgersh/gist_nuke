@@ -15,15 +15,13 @@ opts_parser = OptionParser.new do |opt|
     exit
   end
 
-  opt.on("--hi", "Finally time to test the hi") do
-    GistNuke.hi
-  end
-
   opt.on("--list", "Let's list these gists out") do
+    GistNuke.login unless GistNuke.token_from_file
     GistNuke.load_gists
   end
 
   opt.on("--deleterange range", "This is going to delete a range", Array) do |range|
+    GistNuke.login unless GistNuke.token_from_file
     GistNuke.delete_range(range)
   end
 end

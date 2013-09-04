@@ -22,10 +22,11 @@ module GistNuke
                end
 
     puts ""
-    phone_github(credentials)
+    token = get_github_token(credentials)
+    save_auth_token(token)
   end
 
-  def phone_github(credentials = {})
+  def get_github_token(credentials = {})
     uri = URI(BASE_URL + AUTH_EXT)
     req = Net::HTTP::Post.new(uri.path)
     req.content_type = "application/json"
@@ -41,18 +42,25 @@ module GistNuke
       http.request(req)
     end
 
-    save_auth_token(res.body)
+    JSON.parse(res.body)['token']
   end
 
-  def save_auth_token(res)
-    token = JSON.parse(res)['token']
+  def token_from_file
+    if File.exists?('.gist_nuke')
+      File.read('.gist_nuke')
+    else
+      false
+    end
+  end
+
+  def save_auth_token(token)
     File.open(".gist_nuke", "w+") do |file|
       file.write(token)
     end
   end
 
   def load_gists(page_number = 0)
-    token = File.read(".gist_nuke")
+    token = token_from_file
     uri = URI("#{BASE_URL}gists?access_token=#{token}&page=#{page_number}")
     Net::HTTP.start(uri.host, uri.port,
                     :use_ssl => uri.scheme == 'https') do |http|
@@ -60,32 +68,24 @@ module GistNuke
 
       response = http.request(request)
 
-      gist_hash = JSON.parse(response.body)
-
-      just_keys(gist_hash)
+      JSON.parse(response.body)
     end
   end
 
-  def just_keys(gist_hash = {})
-    just_keys = []
-
-    gist_hash.each do |hash|
-      just_keys << hash['id']
-    end
-
-    p just_keys
+  def just_keys(gists = [])
+    gists.map { |g| g['id'] }
   end
 
   def delete_range(numbers = [])
-    p numbers = numbers.map { |num| num.to_i }
-    p range = (numbers[0]..numbers[-1])
-    p delete_list = load_gists[range]
-    construct_hydra(delete_list)
+    numbers = numbers.map { |num| num.to_i }
+    range = (numbers[0]..numbers[-1])
+    delete_list = just_keys(load_gists)
+    construct_hydra(delete_list[range])
     @batch.run
   end
 
   def construct_hydra(range)
-    t = File.read(".gist_nuke")
+    t = token_from_file
     @batch = Typhoeus::Hydra.new
     range.map { |gist_id| @batch.queue(Typhoeus::Request.new("#{BASE_URL}gists/#{gist_id}?access_token=#{t}",
                                                            method: :delete))}
