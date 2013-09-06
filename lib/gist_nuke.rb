@@ -76,10 +76,23 @@ module GistNuke
     gists.map { |g| g['id'] }
   end
 
+  def get_page_number(range)
+    if range.first <= 30
+      0
+    else
+      range.first / 30
+    end
+  end
+
+  def reduce_range
+    # divides both ends of the range by 10 after switching page
+  end
+
   def delete_range(numbers = [])
     numbers = numbers.map { |num| num.to_i }
-    range = (numbers[0]..numbers[-1])
-    delete_list = just_keys(load_gists)
+    p range = (numbers[0]..numbers[-1])
+    p page_number = get_page_number(range)
+    p delete_list = just_keys(load_gists(page_number))
     construct_hydra(delete_list[range])
     @batch.run
   end
