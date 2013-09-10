@@ -59,7 +59,7 @@ module GistNuke
     end
   end
 
-  def load_gists(page_number = 0)
+  def load_gists(page_number = 1)
     token = token_from_file
     uri = URI("#{BASE_URL}gists?access_token=#{token}&page=#{page_number}")
     Net::HTTP.start(uri.host, uri.port,
@@ -76,11 +76,26 @@ module GistNuke
     gists.map { |g| g['id'] }
   end
 
+  def gather_pages(range)
+    keys = []
+    page_number = 1
+    last_page = false
+
+    until keys.length >= range.last || last_page
+      to_append = just_keys(load_gists(page_number))
+      last_page = to_append.empty?
+      keys += to_append
+      page_number += 1
+    end
+    keys
+  end
+
   def delete_range(numbers = [])
     numbers = numbers.map { |num| num.to_i }
     range = (numbers[0]..numbers[-1])
-    delete_list = just_keys(load_gists)
-    construct_hydra(delete_list[range])
+    list = gather_pages(range)
+    list[range]
+    construct_hydra(list[range])
     @batch.run
   end
 
