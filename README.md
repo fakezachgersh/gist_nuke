@@ -9,7 +9,7 @@ Currently, only range deletion is supported (will be adding more features soon)
 When you have built up the courage to delete gists, run something like:
 
 ````
-GistNuke --deleterange 0,15
+gist_nuke --deleterange 0,15
 ````
 
 This will delete your first 15 gists.  Make the range as big or as small as you want!
